@@ -1,0 +1,58 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- USERS ----------
+    match /users/{userId} {
+      allow read, write: if request.auth != null
+        && request.auth.uid == userId;
+    }
+
+    // ---------- ITEMS ----------
+    match /items/{itemId} {
+      // Anyone can read items
+      allow read: if true;
+
+      // ✅ Only the owner can create an item for themselves
+      allow create: if request.auth != null
+        && request.resource.data.userId == request.auth.uid;
+
+      // ✅ Only owner can update/delete AFTER creation
+      allow update, delete: if request.auth != null
+        && resource.data.userId == request.auth.uid;
+    }
+
+    // ---------- CLAIMS ----------
+    match /claims/{claimId} {
+
+      // A user can only create a claim for an item they lost
+      allow create: if request.auth != null
+        && request.resource.data.lostUserId == request.auth.uid;
+
+      // Only participants (lost user or found user) can read the claim
+      allow read: if request.auth != null
+        && (
+          request.auth.uid == resource.data.lostUserId ||
+          request.auth.uid == resource.data.foundUserId
+        );
+
+      // Only participants can update the claim, with field-level restrictions
+      allow update: if request.auth != null && (
+        // Case 1: Lost User is setting the PIN. They can only update PIN-related fields.
+        (
+          request.auth.uid == resource.data.lostUserId &&
+          request.resource.data.diff(resource.data).affectedKeys()
+            .difference(['handoverPinHash', 'handoverPinLast4', 'pinGeneratedAt', 'updatedAt'].toSet()).size() == 0 &&
+          request.resource.data.diff(resource.data).affectedKeys().size() > 0
+        ) ||
+        // Case 2: Found User is updating the claim status (approving, rejecting, or closing). They can only update status-related fields.
+        (
+          request.auth.uid == resource.data.foundUserId &&
+          request.resource.data.diff(resource.data).affectedKeys()
+            .difference(['status', 'approvedAt', 'rejectedAt', 'finderConfirmed', 'closedAt', 'updatedAt', 'contactExchange'].toSet()).size() == 0 &&
+          request.resource.data.diff(resource.data).affectedKeys().size() > 0
+        )
+      );
+    }
+  }
+}
