@@ -1,109 +1,112 @@
-# Traceback – Lost & Found Web Application
+<div align="center">
 
-Traceback is a full-stack web application that helps users report, track, and recover lost items through a structured and secure workflow.
+<img src="screenshots/home.png" alt="Traceback Banner" width="100%" style="border-radius: 12px;" />
 
-The project focuses on building real-world features such as authentication, data security, controlled handover flows, and dashboard-based user interaction using modern web technologies.
+# 🔍 Traceback
 
-⸻
+**A full-stack Lost & Found platform built for privacy, structure, and trust.**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Firebase-orange?style=for-the-badge&logo=firebase)](https://studio--studio-5844244304-a603d.us-central1.hosted.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-black?style=for-the-badge&logo=github)](https://github.com/khatribhavesh05/Traceback)
+[![Next.js](https://img.shields.io/badge/Next.js-App%20Router-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![Firebase](https://img.shields.io/badge/Firebase-Backend-yellow?style=for-the-badge&logo=firebase)](https://firebase.google.com/)
+
+</div>
+
+---
+
+## 🧭 What is Traceback?
+
+Recovering lost belongings is stressful — and most systems make it worse. Traceback is a structured, secure web application that makes it easy to **report, match, claim, and return lost items** — without exposing anyone's personal information prematurely.
+
+Built as a full-stack learning project, it explores real-world challenges like **authentication, Firestore security rules, claim state machines, AI-assisted matching, and secure physical handovers.**
+
+---
+
 ## 📸 Screenshots
 
-### Home
-![Home](screenshots/home.png)
+| Home | Dashboard |
+|------|-----------|
+| ![Home](screenshots/home.png) | ![Dashboard](screenshots/dashboard.png) |
 
-### Dashboard
-![Dashboard](screenshots/dashboard.png)
+| Report Found Item | Item Details |
+|-------------------|--------------|
+| ![Form](screenshots/form.png) | ![Item Details](screenshots/item_details.png) |
 
-### Report Found Item
-![Report Found Item](screenshots/form.png)
-
-### Item Details
-![Item Details](screenshots/item_details.png)
 ---
-## 🧠 Problem Statement
 
-Recovering lost belongings is often difficult due to:
-	•	Lack of structured reporting systems
-	•	Privacy concerns when sharing personal contact details
-	•	Unclear verification during item handover
-	•	No centralized way to track claim progress
+## ✨ Features
 
-Traceback aims to address these issues with a secure, user-friendly web solution.
+### 🔐 Authentication & Dashboard
+- Secure sign-in via **Firebase Authentication**
+- Personal dashboard to manage all reports and claims in one place
 
-⸻
+### 📋 Lost & Found Reporting
+- Separate, structured flows for reporting **lost** and **found** items
+- Optional image uploads for better identification
+- All data stored securely in **Firestore**
 
-💡 Solution Overview
+### 🤖 AI-Assisted Matching *(Prototype)*
+- Experimental matching logic using item descriptions, categories, and images
+- Powered by **Google Genkit** — built to explore AI in discovery workflows
 
-Traceback provides a controlled lost–found workflow where:
-	•	Users can report lost or found items
-	•	Potential matches are suggested to reduce manual searching
-	•	Ownership verification and handover are handled securely
-	•	Sensitive information is shared only when required
+### 🔒 Ownership Verification & Secure Handover
+- AI-generated questions to verify ownership before approval
+- Finder can **approve or reject** each claim
+- One-time **6-digit PIN** generated for secure physical handover
+- Contact details only revealed after claim approval
 
-The system is designed to prioritize clarity, privacy, and usability.
+### 📊 Full Claim Lifecycle
+- Clear state flow: `pending → approved → closed`
+- Firestore security rules enforce valid state transitions
+- Complete claim history visible from the dashboard
 
-⸻
+---
 
-✨ Core Features
+## 🔄 How It Works
 
-🔐 Authentication & User Access
-	•	Secure user authentication using Firebase Authentication
-	•	Centralized user dashboard for managing reports and claims
+```
+1. Someone finds an item → Reports it on Traceback
+2. Owner sees it → Submits a claim
+3. Finder reviews the claim → Approves or rejects
+4. On approval → A one-time 6-digit PIN is generated
+5. Physical handover → PIN verified in person
+6. Claim closed → Both parties have a record
+```
 
-📁 Lost & Found Reporting
-	•	Separate flows for reporting lost and found items
-	•	Optional image uploads to improve identification
-	•	Structured data storage using Firestore
+---
 
-🤖 AI-Assisted Matching (Prototype)
-	•	AI-assisted logic is used to experiment with matching lost and found items
-	•	Matching is based on item descriptions, categories, and optional images
-	•	Implemented as a prototype to explore how AI can support discovery workflows
+## 🛠️ Tech Stack
 
-🧾 Ownership Verification & Secure Handover
-	•	AI-assisted question generation to support ownership verification
-	•	Claim review flow with approval or rejection by the finder
-	•	One-time 6-digit PIN generated for secure physical handover
-	•	Contact details shared only after claim approval
+| Layer | Technology |
+|---|---|
+| Framework | Next.js (App Router) |
+| Frontend | React, TypeScript |
+| Styling | Tailwind CSS, shadcn/ui |
+| Auth & Database | Firebase Auth, Firestore, Storage |
+| AI Tooling | Google Genkit *(experimental)* |
+| Validation | React Hook Form + Zod |
+| Deployment | Firebase Hosting / Vercel |
 
-📊 Claim Lifecycle Management
-	•	Clear state-based claim flow: pending → approved → closed
-	•	Strict Firestore security rules enforce valid transitions
-	•	Full claim history visible in the user dashboard
+---
 
-⸻
+## 🚀 Getting Started
 
-🛠️ Tech Stack
-	•	Framework: Next.js (App Router)
-	•	Frontend: React, TypeScript
-	•	Styling: Tailwind CSS, shadcn/ui
-	•	Backend & Database: Firebase (Authentication, Firestore, Storage)
-	•	AI Tooling (Experimental): Google Genkit
-	•	Validation: React Hook Form & Zod
-	•	Deployment: Firebase Hosting / Vercel
+### Prerequisites
+- Node.js v18 or later
+- A Firebase project
 
-⸻
+### Setup
 
-🌐 Live Demo
-
-🔗 Firebase Hosted App: https://studio--studio-5844244304-a603d.us-central1.hosted.app
-🔗 GitHub Repository: https://github.com/khatribhavesh05/Traceback
-
-⸻
-
-⚙️ Getting Started
-
-Prerequisites
-	•	Node.js (v18 or later)
-	•	Firebase project
-
-Setup
-
+```bash
 git clone https://github.com/khatribhavesh05/Traceback.git
 cd Traceback
 npm install
+```
 
-Create a .env file in the root directory:
+Create a `.env` file in the root:
 
+```env
 NEXT_PUBLIC_FIREBASE_API_KEY=your_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_domain
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
@@ -113,28 +116,32 @@ NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 
 # AI tooling (experimental)
 GEMINI_API_KEY=your_api_key
+```
 
-Run the application:
+Run the dev server:
 
+```bash
 npm run dev
+```
 
-Open http://localhost:3000
+Open [http://localhost:3000](http://localhost:3000) 🎉
 
-⸻
+---
 
-🔄 Claim Workflow Summary
-	1.	User submits a lost item claim
-	2.	Finder reviews and approves or rejects the claim
-	3.	On approval, a secure handover PIN is generated
-	4.	PIN is verified during physical handover
-	5.	Claim is closed and recorded
+## 📌 Project Note
 
-This flow is enforced using Firestore security rules.
+Traceback is a **functional prototype** built to explore full-stack development concepts including:
+- Firebase security rules and authentication flows
+- Structured state machines for claim management
+- Privacy-first design patterns
+- Experimental AI integration with Google Genkit
 
-⸻
+AI features are implemented for learning purposes and are not production-grade systems.
 
-📌 Project Note
+---
 
-This project is a functional prototype built to explore full-stack development, authentication, database security rules, and structured workflows.
+<div align="center">
 
-AI-assisted features are implemented for learning and experimentation purposes and are not intended to represent a production-grade AI system.
+Made with ☕ and curiosity · [Live Demo →](https://studio--studio-5844244304-a603d.us-central1.hosted.app)
+
+</div>
